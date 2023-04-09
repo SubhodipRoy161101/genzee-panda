@@ -9,6 +9,7 @@ const UserState = (props) => {
   var [user, setUser] = useState({});
   const getUser = async () => {
     const uid = localStorage.getItem("uid");
+    console.log(uid);
     const docRef = doc(db, "User", uid);
     onSnapshot(docRef, (doc) => {
       console.log("Current data: ", doc.data());
