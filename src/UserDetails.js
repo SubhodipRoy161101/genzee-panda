@@ -15,8 +15,8 @@ import { FaRegAddressCard, FaCity } from "react-icons/fa";
 import { TbBuildingEstate } from "react-icons/tb";
 import { GrLocationPin } from "react-icons/gr";
 
-import { auth, provider, db } from "./firebase";
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { db } from "./firebase";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
 import UserContext from "./Context/User/UserContext";
 import { setUserId } from "firebase/analytics";
@@ -55,12 +55,12 @@ const UserDetails = () => {
 
   console.log(updateDisable);
 
-  const updateUser = (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
     const uid = localStorage.getItem("uid");
     console.log(data);
     const docRef = doc(db, "User", uid);
-    setDoc(docRef, data)
+    await updateDoc(docRef, { address: data })
       .then((res) => {
         console.log(res);
       })
