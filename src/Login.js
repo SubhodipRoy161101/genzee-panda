@@ -77,7 +77,7 @@ const Login = () => {
   return (
     <div className="container mt-5">
       <div className="row justify-content-around">
-        <div className="col-4">
+        <div className="col-lg-4 col-md-6 col-sm-6">
           {localStorage.getItem("uid") ? (
             <Button
               colorScheme="blue"

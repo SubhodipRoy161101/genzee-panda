@@ -7,8 +7,8 @@ import { json } from "react-router-dom";
 
 const UserState = (props) => {
   var [user, setUser] = useState({});
-  const uid = localStorage.getItem("uid");
   const getUser = async () => {
+    const uid = localStorage.getItem("uid");
     const docRef = doc(db, "User", uid);
     onSnapshot(docRef, (doc) => {
       console.log("Current data: ", doc.data());
