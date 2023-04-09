@@ -13,7 +13,7 @@ const Login = () => {
   let navigate = useNavigate();
 
   const context = useContext(UserContext);
-  const { user, getUser } = context;
+  const { user } = context;
 
   const data = {
     role: "customer",
@@ -56,11 +56,11 @@ const Login = () => {
         console.log(uid);
       })
       .then(async () => {
-        await getUser();
+        // await getUser();
         // const user = localStorage.getItem("user");
         console.log(user);
-        console.log(user.address.billing_address === "");
-        if (user.address.billing_address !== "") {
+        const address = user.address ? user.address.billing_address : "";
+        if (address !== "") {
           navigate("/");
         } else {
           console.log("Executing else");

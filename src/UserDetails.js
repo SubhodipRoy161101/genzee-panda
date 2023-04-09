@@ -59,7 +59,6 @@ const UserDetails = () => {
     e.preventDefault();
     const uid = localStorage.getItem("uid");
     console.log(data);
-    console.log(uid);
     const docRef = doc(db, "User", uid);
     setDoc(docRef, data)
       .then((res) => {

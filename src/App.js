@@ -7,6 +7,8 @@ import UserState from "./Context/User/UserState";
 import UserDetails from "./UserDetails";
 import AddProduct from "./AddProduct";
 
+import { Provider } from "react-redux";
+
 function App() {
   return (
     <ChakraProvider>
