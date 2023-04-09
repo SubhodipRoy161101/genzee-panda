@@ -13,7 +13,7 @@ const Login = () => {
   let navigate = useNavigate();
 
   const context = useContext(UserContext);
-  const { user } = context;
+  const { user, getUser } = context;
 
   const data = {
     role: "customer",
@@ -56,7 +56,7 @@ const Login = () => {
         console.log(uid);
       })
       .then(async () => {
-        // await getUser();
+        await getUser();
         // const user = localStorage.getItem("user");
         console.log(user);
         console.log(user.address.billing_address === "");
