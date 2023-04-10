@@ -139,17 +139,13 @@ const AddProduct = () => {
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6">
             <FormControl id="name" isRequired>
-              <FormLabel>Tags</FormLabel>
+              <FormLabel>Catagorey</FormLabel>
               <InputGroup borderColor="#E0E1E7">
                 <InputLeftAddon
                   pointerEvents="none"
                   children={<BsPerson color="blue.50" />}
                 />
-                <Input
-                  name="tags"
-                  onChange={handleChange}
-                  placeholder="Enter Values seperated by ','"
-                />
+                <Input name="tags" onChange={handleChange} />
               </InputGroup>
             </FormControl>
           </div>
