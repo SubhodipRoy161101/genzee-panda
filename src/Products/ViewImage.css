@@ -1,0 +1,23 @@
+.prod-image>img {
+    transform-origin: top center;
+    transition: transform 0.5s;
+}
+
+.prod-image>img:hover {
+    transition: transform 0.5s;
+    transform-origin: top center;
+    transform: scale(2.5);
+}
+
+@media only screen and (max-width: 600px) {
+    .prod-image>img {
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+
+    .prod-image>img:hover {
+        transition: transform 0.5s;
+        transform-origin: top center;
+        transform: scale(2.5);
+    }
+}

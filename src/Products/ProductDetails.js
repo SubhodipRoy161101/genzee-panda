@@ -3,6 +3,8 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { Box, Stack } from "@chakra-ui/react";
 
+import { useNavigate } from "react-router-dom";
+
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
@@ -22,6 +24,14 @@ const ProductDetails = () => {
   }, []);
   //COmment
 
+  const navigate = useNavigate();
+
+  const handleImgClick = (url) => {
+    localStorage.setItem("imgUrl", url);
+    console.log(localStorage.getItem("imgUrl"));
+    navigate("/view-product-image");
+  };
+
   const urls = details.url;
   console.log(urls);
   return (
@@ -37,30 +47,44 @@ const ProductDetails = () => {
             // zIndex: "-1",
           }}
         >
-          <Stack
-            direction={"row"}
-            align={"center"}
-            style={{ overflowX: "scroll" }}
-            className="carousel"
+          <div
+            // direction={"row"}
+            // align={"center"}
+            // style={{ overflowX: "scroll" }}
+            className="carousel mt-4"
           >
             {urls
               ? urls.map((url) => {
                   return (
-                    <div>
+                    <div
+                      style={{
+                        maxWidth: "80vw",
+                        marginInlineStart: "0px",
+                      }}
+                      className="m-2"
+                      onClick={() => handleImgClick(url)}
+                      key={url}
+                    >
                       <img
                         src={url}
-                        alt=""
-                        key={url}
-                        style={{ borderRadius: "25px" }}
+                        alt="Product"
+                        style={{
+                          borderRadius: "25px",
+                          maxWidth: "100%",
+                        }}
                       />
                     </div>
                   );
                 })
               : ""}
-          </Stack>
+          </div>
         </div>
         <div className="col-md-8">
-          <h1 style={{ margin: "2rem" }}>{details.title}</h1>
+          <h1
+            style={{ margin: "2rem", fontFamily: "Dongle", fontSize: "40px" }}
+          >
+            {details.title}
+          </h1>
         </div>
       </div>
     </div>

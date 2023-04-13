@@ -1,13 +1,13 @@
-/* .carousel {
+.carousel {
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: unset;
-} */
+}
 
 .carousel>div {
     scroll-snap-align: start;
-    flex-shrink: 0.25;
-    width: 100vw;
+    flex-shrink: 0;
+    width: 30vw;
     margin: 15px;
     height: auto;
     transform-origin: center center;
@@ -19,14 +19,31 @@
     align-items: center;
 }
 
-/* .carousel>div:hover {
-    flex-shrink: 0.15;
-} */
+.carousel:hover::-webkit-scrollbar {
+    position: relative;
+    bottom: 0px;
+    height: 1px;
+    width: 1px;
+}
+
+.carousel:hover {
+    /* transform-origin: top left;
+    transform: scale(2.5);
+    background: #fff; */
+
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel>div {
+        width: 80vw;
+    }
+}
 
 ::-webkit-scrollbar {
     position: relative;
     bottom: 0px;
     height: 5px;
+    width: 1px;
 }
 
 /* Track */
@@ -44,3 +61,6 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Source+Sans+Pro:wght@300;400&display=swap');
