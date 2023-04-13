@@ -8,6 +8,7 @@ import UserDetails from "./UserDetails";
 import AddProduct from "./AddProduct";
 
 import { Provider } from "react-redux";
+import ProductDetails from "./Products/ProductDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/user" element={<UserDetails />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/product-details" element={<ProductDetails />} />
           </Routes>
         </BrowserRouter>
       </UserState>

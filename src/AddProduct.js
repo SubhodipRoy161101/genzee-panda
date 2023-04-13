@@ -26,12 +26,18 @@ const AddProduct = () => {
     color: "",
     title: "",
     desc: "",
-    tags: "",
+    catagorey: "",
     price: "",
     url: "",
   });
 
-  const types = ["image/jpg", "image/jpeg", "image/png", "image/PNG"];
+  const types = [
+    "image/jpg",
+    "image/jpeg",
+    "image/png",
+    "image/PNG",
+    "image/webp",
+  ];
 
   const handleImage = (e) => {
     let selectedFile = [];
@@ -145,7 +151,7 @@ const AddProduct = () => {
                   pointerEvents="none"
                   children={<BsPerson color="blue.50" />}
                 />
-                <Input name="tags" onChange={handleChange} />
+                <Input name="catagorey" onChange={handleChange} />
               </InputGroup>
             </FormControl>
           </div>
