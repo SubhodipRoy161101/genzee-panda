@@ -5,7 +5,7 @@
 
 .prod-image>img:hover {
     transition: transform 0.5s;
-    transform-origin: top center;
+    transform-origin: top;
     transform: scale(2.5);
 }
 
@@ -17,7 +17,7 @@
 
     .prod-image>img:hover {
         transition: transform 0.5s;
-        transform-origin: top center;
+        transform-origin: top;
         transform: scale(2.5);
     }
 }
