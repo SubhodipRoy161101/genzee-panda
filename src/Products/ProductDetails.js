@@ -56,7 +56,9 @@ const ProductDetails = () => {
               : ""}
           </Stack>
         </div>
-        <div className="col-md-8"></div>
+        <div className="col-md-8">
+          <h1 style={{ margin: "2rem" }}>{details.title}</h1>
+        </div>
       </div>
     </div>
   );

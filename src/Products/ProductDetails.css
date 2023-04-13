@@ -6,7 +6,8 @@
 
 .carousel>div {
     scroll-snap-align: start;
-    flex-shrink: 0.3;
+    flex-shrink: 0.25;
+    width: 100vw;
     margin: 15px;
     height: auto;
     transform-origin: center center;
@@ -17,6 +18,10 @@
     justify-content: center;
     align-items: center;
 }
+
+/* .carousel>div:hover {
+    flex-shrink: 0.15;
+} */
 
 ::-webkit-scrollbar {
     position: relative;

@@ -10,7 +10,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-import useImageColor from "use-image-color";
+// import extractSingleColor from "image-color-extractor";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import ProductDetails from "./ProductDetails";
 
@@ -20,9 +20,11 @@ const ProductCard = (props) => {
 
   // const [imgColors, setColors] = useState([]);
 
-  const { colors } = useImageColor(IMAGE, { cors: true, colors: 5 });
-  // console.log(colors);
-  // console.log(Math.random(4));
+  // useEffect(() => {
+  //   extractSingleColor(IMAGE)
+  //     .then((color) => console.log(color))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   const scrW = window.innerWidth;
   const colPad =
@@ -66,29 +68,7 @@ const ProductCard = (props) => {
             rounded={"lg"}
             mt={-12}
             pos={"relative"}
-            // width={"230px"}
-            // _after={{
-            //   transition: "all .3s ease",
-            //   content: '""',
-            //   w: "full",
-            //   h: "full",
-            //   pos: "absolute",
-            //   top: 5,
-            //   left: 0,
-            //   backgroundImage: `url(${IMAGE})`,
-            //   filter: "blur(15px)",
-            //   zIndex: -1,
-            // }}
-            // _groupHover={{
-            //   _after: {
-            //     filter: "blur(20px)",
-            //   },
-            // }}
-            style={{
-              boxShadow: colors
-                ? `${"0px 1.5px 20px -5px" + colors[4]}`
-                : "#000",
-            }}
+            style={{ boxShadow: "0px 1.5px 20px -5px" }}
             borderRadius={20}
           >
             <Image
