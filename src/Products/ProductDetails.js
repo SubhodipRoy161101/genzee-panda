@@ -18,6 +18,7 @@ const ProductDetails = () => {
     },
     []
   );
+  //COmment
 
   const urls = details.url;
   console.log(urls);
