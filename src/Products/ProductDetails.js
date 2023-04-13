@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { Box, Stack } from "@chakra-ui/react";
 
@@ -8,16 +8,18 @@ import "./ProductDetails.css";
 const ProductDetails = () => {
   const [details, setDetails] = useState({});
 
-  useEffect(
-    () => async () => {
-      console.log("In Get Product details");
-      const ref = doc(db, "products", localStorage.getItem("pid"));
-      const data = await getDoc(ref);
-      setDetails(data.data());
+  const getProdDetails = () => {
+    console.log("In Get Product details");
+    const ref = doc(db, "products", localStorage.getItem("pid"));
+    onSnapshot(ref, (doc) => {
+      setDetails(doc.data());
       console.log(details);
-    },
-    []
-  );
+    });
+  };
+
+  useEffect(() => {
+    getProdDetails();
+  }, []);
   //COmment
 
   const urls = details.url;
