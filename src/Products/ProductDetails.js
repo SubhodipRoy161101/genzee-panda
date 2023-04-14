@@ -80,11 +80,52 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="col-md-8">
-          <h1
-            style={{ margin: "2rem", fontFamily: "Dongle", fontSize: "40px" }}
-          >
-            {details.title}
-          </h1>
+          <div style={{ margin: "2rem" }}>
+            <h1
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "50px",
+                lineHeight: "0.2",
+                fontWeight: "700",
+              }}
+            >
+              {details.title}
+            </h1>
+            <p
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "25px",
+                color: "#636363",
+              }}
+            >
+              {details.catagorey}
+            </p>
+
+            <p
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "30px",
+                fontWeight: "400",
+                marginBottom: "0px",
+                lineHeight: "20px",
+              }}
+            >
+              Desciption
+            </p>
+            <p
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "25px",
+                fontWeight: "200",
+                height: "15vh",
+                lineHeight: "15px",
+                marginTop: "0.5rem",
+                color: "#696868",
+              }}
+            >
+              {details.desc}
+            </p>
+          </div>
         </div>
       </div>
     </div>
