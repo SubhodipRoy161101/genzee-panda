@@ -36,6 +36,7 @@ const ProductDetails = () => {
   const handleImgClick = (url) => {
     localStorage.setItem("imgUrl", url);
     console.log(localStorage.getItem("imgUrl"));
+    fl = 1;
     navigate("/view-product-image");
   };
 
