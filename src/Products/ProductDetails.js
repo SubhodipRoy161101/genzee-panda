@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Button, Stack } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
 
 import "./ProductDetails.css";
 
+let fl = 1;
 const ProductDetails = () => {
   const [details, setDetails] = useState({});
 
   const getProdDetails = () => {
+    fl = 0;
     console.log("In Get Product details");
     const ref = doc(db, "products", localStorage.getItem("pid"));
     onSnapshot(ref, (doc) => {
@@ -20,8 +22,13 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    getProdDetails();
-  }, []);
+    if (fl === 1) {
+      getProdDetails();
+    }
+    setUrls(details.url ? details.url[Object.keys(details.url).sort()[0]] : "");
+    setColors(details.url ? Object.keys(details.url) : []);
+  }, [details.url]);
+
   //COmment
 
   const navigate = useNavigate();
@@ -32,8 +39,16 @@ const ProductDetails = () => {
     navigate("/view-product-image");
   };
 
-  const urls = details.url;
-  console.log(urls);
+  console.log(details.url);
+  const [urls, setUrls] = useState(
+    details.url ? details.url[Object.keys(details.url)[0]] : ""
+  );
+  const [colors, setColors] = useState(
+    details.url ? Object.keys(details.url) : []
+  );
+
+  console.log(colors);
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -54,7 +69,7 @@ const ProductDetails = () => {
             className="carousel mt-4"
           >
             {urls
-              ? urls.map((url) => {
+              ? urls.sort().map((url) => {
                   return (
                     <div
                       style={{
@@ -79,8 +94,8 @@ const ProductDetails = () => {
               : ""}
           </div>
         </div>
-        <div className="col-md-8">
-          <div style={{ margin: "2rem" }}>
+        <div className="col-md-8 mt-4">
+          <div style={{ margin: "1.5rem" }}>
             <h1
               style={{
                 fontFamily: "Dongle",
@@ -101,30 +116,58 @@ const ProductDetails = () => {
               {details.catagorey}
             </p>
 
-            <p
+            <h2
               style={{
                 fontFamily: "Dongle",
                 fontSize: "30px",
-                fontWeight: "400",
+                fontWeight: "600",
                 marginBottom: "0px",
                 lineHeight: "20px",
               }}
             >
               Desciption
-            </p>
+            </h2>
             <p
               style={{
                 fontFamily: "Dongle",
                 fontSize: "25px",
                 fontWeight: "200",
-                height: "15vh",
+                height: "25vh",
                 lineHeight: "15px",
                 marginTop: "0.5rem",
+                padding: "0.2rem",
                 color: "#696868",
+                overflow: "auto",
               }}
             >
               {details.desc}
             </p>
+            <h2
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "30px",
+                fontWeight: "600",
+                marginBottom: "0px",
+                lineHeight: "20px",
+              }}
+            >
+              Colors
+            </h2>
+            {colors.sort().map((color) => {
+              return (
+                <Button
+                  onClick={() => setUrls(details.url[color])}
+                  style={{
+                    fontFamily: "Dongle",
+                    margin: "0.5rem",
+                    fontSize: "25px",
+                    fontWeight: "600",
+                  }}
+                >
+                  {color}
+                </Button>
+              );
+            })}
           </div>
         </div>
       </div>

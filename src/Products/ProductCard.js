@@ -16,7 +16,9 @@ import ProductDetails from "./ProductDetails";
 
 const ProductCard = (props) => {
   const { data } = props;
-  const IMAGE = data.url;
+  console.log(data);
+  const IMAGE = data.url[Object.keys(data.url)[0]].sort();
+  console.log(IMAGE);
 
   // const [imgColors, setColors] = useState([]);
 

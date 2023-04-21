@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "./Context/User/UserContext";
 import { Button } from "@chakra-ui/react";
 import AllProducts from "./Products/AllProducts";
+import Test from "./Test";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -26,6 +27,7 @@ const Home = () => {
         ""
       )}
       <AllProducts />
+      <Test />
     </>
   );
 };
