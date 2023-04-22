@@ -7,12 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 import "./ProductDetails.css";
 
-let fl = 1;
 const ProductDetails = () => {
   const [details, setDetails] = useState({});
-
+  const [fl, setFl] = useState(1);
   const getProdDetails = () => {
-    fl = 0;
+    setFl(0);
     console.log("In Get Product details");
     const ref = doc(db, "products", localStorage.getItem("pid"));
     onSnapshot(ref, (doc) => {
@@ -36,7 +35,7 @@ const ProductDetails = () => {
   const handleImgClick = (url) => {
     localStorage.setItem("imgUrl", url);
     console.log(localStorage.getItem("imgUrl"));
-    fl = 1;
+    setFl(0);
     navigate("/view-product-image");
   };
 
@@ -169,6 +168,18 @@ const ProductDetails = () => {
                 </Button>
               );
             })}
+            <h2
+              style={{
+                fontFamily: "Dongle",
+                fontSize: "30px",
+                fontWeight: "600",
+                marginBottom: "0px",
+                lineHeight: "20px",
+                marginTop: "1rem",
+              }}
+            >
+              Size
+            </h2>
           </div>
         </div>
       </div>

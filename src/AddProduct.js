@@ -40,12 +40,6 @@ const AddProduct = () => {
     "image/webp",
   ];
 
-  const [update, updateFn] = useState(false);
-
-  // const [pid, setPid] = useState("");
-
-  // urls = {};
-
   const handleImage = (e) => {
     let selectedFile = [];
     let fl = 0;
@@ -56,12 +50,10 @@ const AddProduct = () => {
     if (selectedFile.length > 0) {
       for (let i = 0; i < selectedFile.length; i++) {
         if (selectedFile[i] && types.includes(selectedFile[i].type)) {
-          // image.push(selectedFile[i]);
           fl = 1;
           setImageError(false);
         } else {
           console.log("Exexuting Else");
-          // setImage(null);
           setImageError(true);
         }
       }
@@ -77,7 +69,6 @@ const AddProduct = () => {
   const docRef = collection(db, "products");
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -85,7 +76,6 @@ const AddProduct = () => {
   var urls = {};
 
   const addImage = async (pid) => {
-    // var imageColor = data.color.split(",");
     console.log(imageColors);
     for (let i = 0; i < imageColors.length; i++) {
       let imageColorFolder = imageColors[i];
@@ -129,20 +119,8 @@ const AddProduct = () => {
       });
   };
 
-  // const imageColorChange = async (e) => {
-  //   handleChange(e);
-  // };
-
-  // const updateUrls = async () => {
-  //   console.log(urls);
-  //   // const prodRef = doc(db, "products", pid);
-  //   // await updateDoc(prodRef, { url: urls });
-  // };
-
   useEffect(() => {
-    // console.log(data.color);
     const colors = data.color.split(",");
-    // console.log(colors);
     setImageColors(colors);
   }, [data.color]);
 
