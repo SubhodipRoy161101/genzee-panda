@@ -2,13 +2,14 @@
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: unset;
+    border-radius: 2rem;
 }
 
 .carousel>div {
     scroll-snap-align: start;
     flex-shrink: 0;
     width: 30vw;
-    margin: 15px;
+    /* margin: 15px; */
     height: auto;
     transform-origin: center center;
     transform: scale(1);
@@ -42,7 +43,7 @@
 ::-webkit-scrollbar {
     position: relative;
     bottom: 0px;
-    height: 5px;
+    height: 0.1rem;
     width: 1px;
 }
 
@@ -60,6 +61,12 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
+}
+
+.details>* {
+    padding-left: 0.75rem;
+    padding-top: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
