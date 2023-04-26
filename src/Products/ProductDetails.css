@@ -1,3 +1,7 @@
+.carouselBox {
+    min-height: 100vh;
+}
+
 .carousel {
     display: flex;
     overflow-x: scroll;
@@ -34,7 +38,11 @@
 
 } */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 718px) {
+    .carouselBox {
+        min-height: 30vh;
+    }
+
     .carousel>div {
         width: 80vw;
     }

@@ -87,7 +87,7 @@ const ProductDetails = () => {
               // zIndex: "-1",
             }}
           >
-            <Box m={4} rounded={"2rem"} minH={"100vh"}>
+            <Box m={4} rounded={"2rem"} className="carouselBox">
               <div className="carousel mt-4">
                 {urls
                   ? urls.sort().map((url) => {
