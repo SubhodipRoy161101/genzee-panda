@@ -13,6 +13,8 @@
     .prod-image>img {
         margin-top: 10%;
         margin-bottom: 10%;
+        transform-origin: left top;
+        transition: transform 0.5s;
     }
 
     .prod-image>img:hover {

@@ -1,78 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
-import { Box, Button, Stack, Badge } from "@chakra-ui/react";
-
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Box, Button, Badge, Tabs, TabList, Tab } from "@chakra-ui/react";
 
 import "./ProductDetails.css";
 
-const ProductDetails = () => {
-  const [details, setDetails] = useState({});
-  const [fl, setFl] = useState(1);
-  const [updateBgColor, setUpdateBgColor] = useState(true);
-  const getProdDetails = () => {
-    setFl(0);
-    console.log("In Get Product details");
-    const ref = doc(db, "products", localStorage.getItem("pid"));
-    onSnapshot(ref, (doc) => {
-      setDetails(doc.data());
-      console.log(details);
-    });
-  };
+import ProductContext from "../Context/Products/ProductContext";
+import OptionBtns from "./OptionBtns";
 
-  useEffect(() => {
-    if (fl === 1) {
-      getProdDetails();
-    }
-    setUrls(details.url ? details.url[Object.keys(details.url).sort()[0]] : "");
-    setColors(details.url ? Object.keys(details.url) : []);
-  }, [details.url]);
-
-  //COmment
-
-  const navigate = useNavigate();
-
-  const handleImgClick = (url) => {
-    localStorage.setItem("imgUrl", url);
-    console.log(localStorage.getItem("imgUrl"));
-    setFl(0);
-    navigate("/view-product-image");
-  };
-
-  console.log(details.url);
-  const [urls, setUrls] = useState(
-    details.url ? details.url[Object.keys(details.url)[0]] : ""
-  );
-  const [colors, setColors] = useState(
-    details.url ? Object.keys(details.url) : []
-  );
-
-  console.log(colors);
-
-  const [bgColor, setBgColor] = useState(
-    details.url ? Object.keys(details.url)[0] : ""
-  );
-
-  console.log(bgColor);
-
-  useEffect(() => {
-    if (fl === 1) {
-      getProdDetails();
-      setUrls(
-        details.url ? details.url[Object.keys(details.url).sort()[0]] : ""
-      );
-      setColors(details.url ? Object.keys(details.url) : []);
-    }
-    console.log(updateBgColor);
-    if (updateBgColor) {
-      console.log("Inside setBgColor");
-      setBgColor(details.url ? Object.keys(details.url).sort()[0] : "");
-    }
-
-    console.log(bgColor);
-  }, [details.url, bgColor, colors]);
-
+// var fl = 1;
+const ProductDetails = (props) => {
+  const context = useContext(ProductContext);
+  const {
+    bgColor,
+    urls,
+    handleImgClick,
+    details,
+    colors,
+    setUrls,
+    setUpdateBgColor,
+    setBgColor,
+    sizes,
+    setSize,
+  } = context;
   return (
     <Box bg={`${bgColor + ".50"}`}>
       <div className="container-fluid">
@@ -107,7 +55,7 @@ const ProductDetails = () => {
                             style={{
                               // borderRadius: "25px",
                               width: "100%",
-                              height: "90vh",
+                              // height: "90vh",
                             }}
                           />
                         </div>
@@ -136,12 +84,39 @@ const ProductDetails = () => {
                     fontFamily: "Dongle",
                     fontSize: "1rem",
                     color: "#636363",
+                    marginRight: "0.5rem",
                   }}
                   rounded={5}
                 >
                   {details.catagorey}
                 </Badge>
+
+                <Badge
+                  colorScheme={`${bgColor}`}
+                  style={{
+                    fontFamily: "Dongle",
+                    fontSize: "1rem",
+                    color: "#636363",
+                    marginRight: "0.5rem",
+                  }}
+                  rounded={5}
+                >
+                  {details.fabric}
+                </Badge>
               </p>
+
+              <Box rounded={"1rem"}>
+                <p
+                  style={{
+                    fontFamily: "Dongle",
+                    fontSize: "2.5rem",
+                    fontWeight: "600",
+                  }}
+                >
+                  <span style={{ fontSize: "1.2rem" }}>₹</span>
+                  {details.price}
+                </p>
+              </Box>
 
               <Box bg={`${bgColor + ".100"}`} rounded={"1rem"}>
                 <h2
@@ -182,26 +157,31 @@ const ProductDetails = () => {
               >
                 Colors
               </h2>
-              {colors.sort().map((color) => {
-                return (
-                  <Button
-                    onClick={() => {
-                      setUrls(details.url[color]);
-                      setUpdateBgColor(false);
-                      setBgColor(color);
-                    }}
-                    style={{
-                      fontFamily: "Dongle",
-                      margin: "0.5rem",
-                      fontSize: "25px",
-                      fontWeight: "600",
-                    }}
-                    bg={`${color + ".100"}`}
-                  >
-                    {color}
-                  </Button>
-                );
-              })}
+              <Tabs variant={"soft-rounded"} colorScheme={bgColor}>
+                <TabList>
+                  {colors.sort().map((color) => {
+                    return (
+                      <OptionBtns
+                        onClick={() => {
+                          setUrls(details.url[color]);
+                          // setUpdateBgColor(false);
+                          if (color.toLowerCase() === "black") {
+                            setBgColor("BlackAlpha");
+                          } else if (color.toLowerCase() === "black") {
+                            setBgColor("gray");
+                          } else {
+                            setBgColor(color.toLowerCase());
+                          }
+                        }}
+                        bgColor={color}
+                        val={color}
+                        key={color}
+                        type={"color"}
+                      />
+                    );
+                  })}
+                </TabList>
+              </Tabs>
               <h2
                 style={{
                   fontFamily: "Dongle",
@@ -214,6 +194,23 @@ const ProductDetails = () => {
               >
                 Size
               </h2>
+              <Tabs colorScheme={bgColor} variant="soft-rounded">
+                <TabList>
+                  {sizes.sort().map((size) => {
+                    return (
+                      <OptionBtns
+                        bgColor={bgColor}
+                        val={size}
+                        key={size}
+                        type={"size"}
+                        onClick={() => {
+                          setSize(size);
+                        }}
+                      />
+                    );
+                  })}
+                </TabList>
+              </Tabs>
             </div>
           </div>
         </div>

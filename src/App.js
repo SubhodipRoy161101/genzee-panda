@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import ProductDetails from "./Products/ProductDetails";
 import ViewImage from "./Products/ViewImage";
 import Test from "./Test";
+import ProductState from "./Context/Products/ProductState";
 
 function App() {
   // const location = useLocation();
@@ -18,15 +19,17 @@ function App() {
     <ChakraProvider>
       <UserState>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/user" element={<UserDetails />} />
-            <Route path="/add-product" element={<AddProduct />} />
-            <Route path="/product-details" element={<ProductDetails />} />
-            <Route path="/view-product-image" element={<ViewImage />} />
-            <Route path="/test" element={<Test />} />
-          </Routes>
+          <ProductState>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/user" element={<UserDetails />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/product-details" element={<ProductDetails />} />
+              <Route path="/view-product-image" element={<ViewImage />} />
+              <Route path="/test" element={<Test />} />
+            </Routes>
+          </ProductState>
         </BrowserRouter>
       </UserState>
     </ChakraProvider>
