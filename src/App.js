@@ -19,17 +19,29 @@ function App() {
     <ChakraProvider>
       <UserState>
         <BrowserRouter>
-          <ProductState>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/user" element={<UserDetails />} />
-              <Route path="/add-product" element={<AddProduct />} />
-              <Route path="/product-details" element={<ProductDetails />} />
-              <Route path="/view-product-image" element={<ViewImage />} />
-              <Route path="/test" element={<Test />} />
-            </Routes>
-          </ProductState>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/user" element={<UserDetails />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route
+              path="/product-details"
+              element={
+                <ProductState>
+                  <ProductDetails />
+                </ProductState>
+              }
+            />
+            <Route
+              path="/view-product-image"
+              element={
+                <ProductState>
+                  <ViewImage />
+                </ProductState>
+              }
+            />
+            <Route path="/test" element={<Test />} />
+          </Routes>
         </BrowserRouter>
       </UserState>
     </ChakraProvider>

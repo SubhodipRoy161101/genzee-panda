@@ -1,5 +1,5 @@
 import { Button, Icon } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { auth, provider, db } from "./firebase";
 import { signInWithPopup } from "firebase/auth";
 import { collection, getDocs, setDoc, doc } from "firebase/firestore";
@@ -13,7 +13,7 @@ const Login = () => {
   let navigate = useNavigate();
 
   const context = useContext(UserContext);
-  const { user } = context;
+  const { user, getUser } = context;
 
   const data = {
     role: "customer",
@@ -46,29 +46,44 @@ const Login = () => {
       });
   };
 
+  var fl = 0;
   const googleSignIn = async () => {
-    await signInWithPopup(auth, provider)
-      .then((data) => {
-        // console.log(data);
-        console.log(data);
-        const uid = data.user.reloadUserInfo.localId;
-        localStorage.setItem("uid", uid);
-        console.log(uid);
-      })
-      .then(async () => {
-        // await getUser();
-        // const user = localStorage.getItem("user");
-        console.log(user);
-        const address = user.address ? user.address.billing_address : "";
-        if (address !== "") {
-          navigate("/");
-        } else {
-          console.log("Executing else");
-          createUser();
-          navigate("/user");
-        }
-      });
+    await signInWithPopup(auth, provider).then(async (data) => {
+      // console.log(data);
+      console.log(data);
+      const uid = data.user.reloadUserInfo.localId;
+      localStorage.setItem("uid", uid);
+      console.log(uid);
+      await getUser();
+      navigate("/");
+    });
+    // .then(async () => {
+    //   // const user = localStorage.getItem("user");
+    //   console.log(user);
+    //   const address = user.address ? user.address.billing_address : "";
+    //   if (address !== "") {
+    //     navigate("/");
+    //   } else {
+    //     console.log("Executing else");
+    //     createUser();
+    //     navigate("/user");
+    //   }
+    // });
   };
+
+  useEffect(() => {
+    if (fl === 1) {
+      console.log(user);
+      const address = user.address ? user.address.billing_address : "";
+      if (address !== "") {
+        navigate("/");
+      } else {
+        console.log("Executing else");
+        createUser();
+        navigate("/user");
+      }
+    }
+  }, [user]);
 
   const logout = () => {
     localStorage.removeItem("uid");

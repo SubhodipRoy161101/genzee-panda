@@ -12,7 +12,7 @@ const OptionBtns = (props) => {
         marginRight: "0.5rem",
       }}
       bg={
-        type == "color"
+        type === "color"
           ? `${bgColor.toLowerCase() + ".100"}`
           : `${bgColor.toLowerCase() + ".50"}`
       }
